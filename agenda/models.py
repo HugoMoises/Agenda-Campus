@@ -24,8 +24,8 @@ class Evento(models.Model):
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
     criado_em = models.DateTimeField(auto_now_add=True)
-    local = models.ForeignKey(Local, on_delete=models.Protect)
-    categoria = models.ManyToMany(Categoria, null=True, blank=True)
+    local = models.ForeignKey(Local, on_delete=models.PROTECT)
+    categoria = models.ManyToManyField(Categoria, null=True, blank=True)
 
     def __str__(self):
         return self.titulo
@@ -42,8 +42,17 @@ class Atividade(models.Model):
     def __str__(self):
         return self.titulo
 
+    class Meta: 
+        ordering = ['horario']
+
 class Inscricao(models.Model):
     nome = models.CharField(max_length=250)
     email = models.EmailField()
     inscrito_em = models.DateTimeField(auto_now_add=True)
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nome
+
+        class Meta:
+            verbose_name_plural = 'inscrições'
