@@ -1,0 +1,2 @@
+Tentativa de excluir um local que já tem eventos registrados:
+- A tentativa falhou porque o local já tem um evento registrado e indicou quee excluísse primeiro os eventos que estão registrados naquele local. Isso ocorre pelo uso do PROTECT no on_delete. O PROTECT não permite que aconteça a exclusão de um local que já tenha um evento registrado nele, pois o evento ficaria sem local.
