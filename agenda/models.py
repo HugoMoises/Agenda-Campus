@@ -59,3 +59,8 @@ class Inscricao(models.Model):
 
         class Meta:
             verbose_name_plural = 'inscrições'
+
+class Relatorio(models.Model):
+    presentes = models.PositiveIntegerField()
+    observacoes = models.TextField(null=True, blank=True)
+    evento = models.OneToOneField(Evento, on_delete=models.CASCADE)
