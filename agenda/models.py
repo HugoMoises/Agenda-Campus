@@ -24,8 +24,8 @@ class Evento(models.Model):
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
     criado_em = models.DateTimeField(auto_now_add=True)
-    local = models.ForeignKey(Local, on_delete=models.PROTECT)
-    categoria = models.ManyToManyField(Categoria, null=True, blank=True)
+    local = models.ForeignKey(Local, on_delete=models.PROTECT, related_name="eventos")
+    categoria = models.ManyToManyField(Categoria, null=True, blank=True, related_name="eventos")
 
     def __str__(self):
         return self.titulo
@@ -33,11 +33,14 @@ class Evento(models.Model):
     class Meta:
         ordering = ['inicio']
 
+    def vagas_restantes(self):
+        return f"Vagas restantes: {self.capacidade - self.inscricoes.count()}" 
+
 class Atividade(models.Model):
     titulo = models.TextField()
     palestrante = models.CharField(max_length=250)
     horario = models.TimeField()
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, related_name="atividades")
 
     def __str__(self):
         return self.titulo
@@ -49,7 +52,7 @@ class Inscricao(models.Model):
     nome = models.CharField(max_length=250)
     email = models.EmailField()
     inscrito_em = models.DateTimeField(auto_now_add=True)
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, related_name="inscricoes")
 
     def __str__(self):
         return self.nome
