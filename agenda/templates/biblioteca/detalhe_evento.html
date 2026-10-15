@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+</head>
+<body>
+    <h1> {{evento.titulo}} </h1>
+    {% for atividade in evento.atividades.all %}
+        <h2>Atividade: {{atividade.titulo}} </h2>
+        <p>Palestrante: {{atividade.palestrante}}</p>
+        <p>Horário: {{atividade.horario}}</p>
+        <h3>Vagas restantes: {{evento.vagas_restantes}}</h3>
+    {% empty %}
+        <h1>Não há atividades registradas para esse evento</h1>
+    {% endfor %}
+
+    {% if evento.relatorio %}
+        <p><span>Presentes: </span>{{evento.relatorio.presentes}}</p>
+        <p><span>Observações: {{evento.relatorio.observacoes}} </span></p>
+    {% else %}
+        <p>Esse evento não tem relatório</p>
+    {% endif %}
+</body>
+</html>

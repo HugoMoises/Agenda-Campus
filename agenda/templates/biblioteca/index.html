@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Eventos</h1>
+    <section class="section-cards">
+        {% for evento in eventos %}
+            <div class="card">
+                <div class="card-content">
+                    <h2><a href="{% url 'detalhe_evento' evento.id %}">{{ evento.titulo }}</a></h2>
+                    <hr>
+                    <p><span>Data:</span> {{evento.inicio}} </p>
+                    <p><span>Local:</span> {{evento.local}} </p>
+                    {% for categoria in evento.categoria.all %}
+                        <a href="#"> {{categoria.nome}} </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% empty %}
+            <p>Não há eventos cadastrados</p>
+        {% endfor %}   
+    </section>    
+</body>
+</html>

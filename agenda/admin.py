@@ -14,6 +14,7 @@ class EventoAdmin(admin.ModelAdmin):
     list_display = ['titulo', 'inicio', 'local']
     list_filter = ['local', 'categoria']
     search_fields = ['titulo']
+    filter_horizontal = ['categoria']
 
     inlines = [AtividadeInline, RelatorioInline]
 

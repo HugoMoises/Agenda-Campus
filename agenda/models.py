@@ -25,7 +25,7 @@ class Evento(models.Model):
     fim = models.DateTimeField()
     criado_em = models.DateTimeField(auto_now_add=True)
     local = models.ForeignKey(Local, on_delete=models.PROTECT, related_name="eventos")
-    categoria = models.ManyToManyField(Categoria, null=True, blank=True, related_name="eventos")
+    categoria = models.ManyToManyField(Categoria, blank=True, related_name="eventos")
 
     def __str__(self):
         return self.titulo
@@ -34,7 +34,7 @@ class Evento(models.Model):
         ordering = ['inicio']
 
     def vagas_restantes(self):
-        return f"Vagas restantes: {self.capacidade - self.inscricoes.count()}" 
+        return f"{self.local.capacidade - self.inscricoes.count()}" 
 
 class Atividade(models.Model):
     titulo = models.TextField()
@@ -63,4 +63,4 @@ class Inscricao(models.Model):
 class Relatorio(models.Model):
     presentes = models.PositiveIntegerField()
     observacoes = models.TextField(null=True, blank=True)
-    evento = models.OneToOneField(Evento, on_delete=models.CASCADE)
+    evento = models.OneToOneField(Evento, on_delete=models.CASCADE, related_name="relatorio")
