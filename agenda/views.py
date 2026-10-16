@@ -2,7 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from .models import Evento, Local
 
 def index(request):
-    eventos = Evento.objects.all()
+    categoria_id = request.GET.get("categoria")
+
+    if categoria_id:
+        eventos = Evento.objects.filter(categoria__id = categoria_id)
+    
+    else:
+        eventos = Evento.objects.all()
 
     context = {
         "eventos": eventos

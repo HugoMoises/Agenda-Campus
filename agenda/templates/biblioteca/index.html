@@ -18,7 +18,7 @@
                     <p><span>Data:</span> {{evento.inicio}} </p>
                     <p><span>Local:</span><a href="{% url 'local' evento.local.id %}"> {{evento.local}}</a> </p>
                     {% for categoria in evento.categoria.all %}
-                        <a href="#"> {{categoria.nome}} </a>
+                        <a href="?categoria={{categoria.id}}"> {{categoria.nome}} </a>
                     {% endfor %}
                 </div>
             </div>
