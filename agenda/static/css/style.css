@@ -35,13 +35,13 @@
     margin-bottom: 16px;
 }
   
-.card-content a{
+a{
     text-decoration: none;
     display: block;
     color: #666666;
 }
 
-.card-content a:hover{
+a:hover{
     color:#333333
 }
   

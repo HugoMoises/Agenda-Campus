@@ -16,7 +16,7 @@
                     <h2><a href="{% url 'detalhe_evento' evento.id %}">{{ evento.titulo }}</a></h2>
                     <hr>
                     <p><span>Data:</span> {{evento.inicio}} </p>
-                    <p><span>Local:</span> {{evento.local}} </p>
+                    <p><span>Local:</span><a href="{% url 'local' evento.local.id %}"> {{evento.local}}</a> </p>
                     {% for categoria in evento.categoria.all %}
                         <a href="#"> {{categoria.nome}} </a>
                     {% endfor %}
