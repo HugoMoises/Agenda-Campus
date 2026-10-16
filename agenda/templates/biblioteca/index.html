@@ -1,19 +1,14 @@
+{% extends 'base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% block content %}
     <h1>Eventos</h1>
+    <input type="text" id="campoBusca">
     <section class="section-cards">
         {% for evento in eventos %}
             <div class="card">
                 <div class="card-content">
-                    <h2><a href="{% url 'detalhe_evento' evento.id %}">{{ evento.titulo }}</a></h2>
+                    <h2 class="card-title"><a href="{% url 'detalhe_evento' evento.id %}">{{ evento.titulo }}</a></h2>
                     <hr>
                     <p><span>Data:</span> {{evento.inicio}} </p>
                     <p><span>Local:</span><a href="{% url 'local' evento.local.id %}"> {{evento.local}}</a> </p>
@@ -23,8 +18,12 @@
                 </div>
             </div>
         {% empty %}
-            <p>Não há eventos cadastrados</p>
+            <p >Não há eventos cadastrados</p>
         {% endfor %}   
+        <p id="no-event" style="display: none;">Nenhum evento encontrado</p>
     </section>    
-</body>
-</html>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

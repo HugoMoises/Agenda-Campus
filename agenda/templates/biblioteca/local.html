@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{local.nome}}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <h1> {{local.nome}} </h1>
     <h2>Capacidade: {{local.capacidade}}</h2>
     <h3>Eventos neste local:</h3>
@@ -14,5 +8,4 @@
         <li><a href="{% url 'detalhe_evento' evento.id %}">{{evento.titulo}}</a></li>
     {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
